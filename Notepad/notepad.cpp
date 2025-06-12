@@ -75,7 +75,7 @@ void Notepad::save()
     } else {
         fileName = currentFile;
     }
-    QFile file(fileName);
+    QFile file(fileName + ".html");
     if (!file.open(QIODevice::WriteOnly | QFile::Text)) {
         QMessageBox::warning(this, "Warning", "Cannot save file: " + file.errorString());
         return;
@@ -91,21 +91,25 @@ void Notepad::save()
 
 void Notepad::saveAs()
 {
-    QString fileName = QFileDialog::getSaveFileName(this, "Save as");
-    QFile file(fileName+ ".docx");
+    QString fileName = QFileDialog::getSaveFileName(this, "Enregistrer sous", "", "Fichiers HTML (*.html);;Tous les fichiers (*)");
+    if (fileName.isEmpty())
+        return;
 
+    if (!fileName.endsWith(".html", Qt::CaseInsensitive))
+        fileName += ".html";
+
+    QFile file(fileName);
     if (!file.open(QFile::WriteOnly | QFile::Text)) {
-        QMessageBox::warning(this, "Warning", "Cannot save file: " + file.errorString());
+        QMessageBox::warning(this, "Warning", "Impossible d'enregistrer le fichier : " + file.errorString());
         return;
     }
 
     currentFile = fileName;
     setWindowTitle(fileName);
     QTextStream out(&file);
-    QString text = ui->textEdit->toPlainText();
+    QString text = ui->textEdit->toHtml();
     out << text;
     file.close();
-
 }
 
 void Notepad::print()

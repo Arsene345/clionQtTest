@@ -79,18 +79,14 @@ li.checked::marker { content: &quot;\2612&quot;; }
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionNew">
    <property name="icon">
-    <iconset resource="../resources/resources.qrc">
-     <normaloff>:/images/images/new.png</normaloff>:/images/images/new.png</iconset>
+    <iconset>
+     <normaloff>../resources/images/new.png</normaloff>../resources/images/new.png</iconset>
    </property>
    <property name="text">
     <string>New</string>
    </property>
   </action>
   <action name="actionOpen">
-   <property name="icon">
-    <iconset resource="../resources/resources.qrc">
-     <normaloff>:/images/images/open.png</normaloff>:/images/images/open.png</iconset>
-   </property>
    <property name="text">
     <string>Open</string>
    </property>
